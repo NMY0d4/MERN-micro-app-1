@@ -11,6 +11,7 @@ const PORT = 4000;
 const posts = {};
 
 app.get("/posts", (req, res) => {
+    console.log(posts);
     res.send(posts);
 });
 
@@ -21,6 +22,7 @@ app.post("/posts", (req, res) => {
         id,
         title,
     };
+
     res.status(201).send(posts[id]);
 });
 
