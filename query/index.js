@@ -1,6 +1,5 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const { randomBytes } = require("crypto");
 const cors = require("cors");
 
 const app = express();
@@ -24,13 +23,11 @@ app.post("/events", (req, res) => {
     }
 
     if (type === "CommentCreated") {
-        const { id, comment, postId } = data;
+        const { id, comment, postId, status } = data;
         const post = posts[postId];
 
-        post.comments.push({ id, comment });
+        post.comments.push({ id, comment, status });
     }
-
-    console.log(posts);
 
     res.send({});
 });
