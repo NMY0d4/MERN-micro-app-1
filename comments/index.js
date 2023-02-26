@@ -44,14 +44,15 @@ app.post("/events", async (req, res) => {
     const { type, data } = req.body;
 
     if (type === "CommentModerated") {
-        let { postId, id, status, comment } = data;
-        console.log(data);
+        const { postId, id, status, comment } = data;
 
         const comments = commentsByPostId[postId];
 
-        comment = comments.find((comment) => comment.commentId === id);
+        const commentToUpdate = comments.find(
+            (comment) => comment.commentId === id
+        );
 
-        comment.status = status;
+        commentToUpdate.status = status;
 
         await axios
             .post("http://localhost:4005/events", {

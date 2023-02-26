@@ -36,6 +36,7 @@ app.post("/events", (req, res) => {
             (comment) => comment.id === id
         );
         commentToUpdate.status = status;
+        commentToUpdate.comment = comment;
     }
 
     res.send({});
