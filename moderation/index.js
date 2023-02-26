@@ -7,14 +7,24 @@ app.use(bodyParser.json());
 
 const PORT = 4003;
 
-app.post("/events", (req, res) => {
+app.post("/events", async (req, res) => {
     const { type, data } = req.body;
     console.log("Event Received", req.body.type);
 
-    // if (type === "CommentCreated") {
-    //     const { id, comment, postId } = data;
+    if (type === "CommentCreated") {
+        let { comment, status } = data;
+        status = comment.includes("orange") ? "rejected" : "approved";
+        console.log(status);
 
-    // }
+        await axios
+            .post("http://localhost:4005/events", {
+                type: "commentModerated",
+                data: { ...data, status },
+            })
+            .catch((err) => {
+                console.log(err.message);
+            });
+    }
     res.send({});
 });
 
