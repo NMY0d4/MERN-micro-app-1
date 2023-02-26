@@ -18,7 +18,7 @@ app.post("/events", async (req, res) => {
 
         await axios
             .post("http://localhost:4005/events", {
-                type: "commentModerated",
+                type: "CommentModerated",
                 data: { ...data, status },
             })
             .catch((err) => {
